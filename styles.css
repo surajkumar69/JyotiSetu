@@ -38,10 +38,16 @@
 }
 
 /* --- RESET & BASIC STYLES --- */
-* {
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html, body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, select, textarea {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
 html {
@@ -385,7 +391,7 @@ img {
 
 .header-container {
     width: 100%;
-    max-width: 1300px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 24px;
     display: flex;
@@ -426,6 +432,7 @@ img {
     color: var(--color-gold-light);
     letter-spacing: 1px;
     line-height: 1.1;
+    white-space: nowrap;
 }
 
 .brand-tagline {
@@ -434,6 +441,7 @@ img {
     color: var(--color-white);
     letter-spacing: 2px;
     text-transform: uppercase;
+    white-space: nowrap;
 }
 
 .nav-menu ul {
@@ -691,12 +699,17 @@ img {
     overflow: hidden;
     border: var(--border-gold-glass);
     box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    max-width: 650px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .about-banner-img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
+    display: block;
     transition: transform 0.8s ease;
 }
 
@@ -732,10 +745,17 @@ img {
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid rgba(212, 175, 55, 0.2);
+    max-width: 650px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .overview-banner-img {
     width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
     transition: transform 0.6s ease;
 }
 
@@ -782,13 +802,14 @@ img {
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(212, 175, 55, 0.12);
     border-radius: 16px;
-    padding: 35px 30px;
+    padding: 30px;
     transition: var(--transition-smooth);
     position: relative;
     overflow: hidden;
     cursor: pointer;
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .service-card::before {
@@ -1183,10 +1204,16 @@ img {
     box-shadow: 0 15px 40px rgba(0,0,0,0.6);
     cursor: pointer;
     width: 100%;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .flyer-img {
     width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
     transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -1273,6 +1300,7 @@ img {
     transition: var(--transition-smooth);
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .healing-card:hover {
@@ -1309,18 +1337,19 @@ img {
 .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 35px;
+    gap: 30px;
 }
 
 .product-card {
     background: var(--color-card-bg);
     border: 1px solid rgba(212, 175, 55, 0.15);
-    border-radius: 20px;
+    border-radius: 16px;
     overflow: hidden;
     transition: var(--transition-smooth);
     box-shadow: 0 10px 30px rgba(0,0,0,0.4);
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .product-card:hover {
@@ -1331,7 +1360,8 @@ img {
 
 .product-img-box {
     width: 100%;
-    height: 250px;
+    aspect-ratio: 1 / 1;
+    height: auto;
     overflow: hidden;
     position: relative;
     border-bottom: 1px solid rgba(212, 175, 55, 0.15);
@@ -1340,7 +1370,7 @@ img {
 .product-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     transition: transform 0.6s ease;
 }
 
@@ -1349,7 +1379,7 @@ img {
 }
 
 .product-details {
-    padding: 25px;
+    padding: 30px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -1408,7 +1438,7 @@ img {
 .why-card {
     background: rgba(22, 7, 34, 0.4);
     border: 1px solid rgba(212, 175, 55, 0.1);
-    border-radius: 12px;
+    border-radius: 16px;
     padding: 30px;
     text-align: center;
     transition: var(--transition-smooth);
@@ -1559,6 +1589,7 @@ img {
     transition: var(--transition-smooth);
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .blog-card:hover {
@@ -2033,8 +2064,8 @@ img {
 /* --- FLOATING CONTROLS --- */
 .scroll-to-top {
     position: fixed;
-    bottom: 95px;
-    right: 30px;
+    bottom: 90px;
+    right: 22px;
     width: 50px;
     height: 50px;
     background: var(--color-card-solid);
@@ -2067,8 +2098,8 @@ img {
 
 .floating-whatsapp {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: 20px;
+    right: 20px;
     width: 54px;
     height: 54px;
     background: #25D366;
@@ -2317,13 +2348,13 @@ img {
 .youtube-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 35px;
+    gap: 30px;
 }
 
 .video-card {
     background: var(--color-card-bg);
     border: 1px solid rgba(212, 175, 55, 0.15);
-    border-radius: 20px;
+    border-radius: 16px;
     overflow: hidden;
     transition: var(--transition-smooth);
     box-shadow: 0 10px 30px rgba(0,0,0,0.4);
@@ -2356,7 +2387,7 @@ img {
 }
 
 .video-info {
-    padding: 25px;
+    padding: 30px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -2496,11 +2527,11 @@ img {
     
     .services-grid, .healing-grid, .products-grid, .why-us-grid, .blogs-grid, .youtube-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
+        gap: 30px;
     }
     
     .about-visual, .overview-img-box, .karmkand-callout-card, .numerology-visual, .booking-form-box {
-        max-width: 600px;
+        max-width: 650px;
         margin: 0 auto;
         width: 100%;
     }
@@ -2562,7 +2593,7 @@ img {
     
     .services-grid, .healing-grid, .products-grid, .why-us-grid, .blogs-grid, .youtube-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 30px;
     }
     
     .about-pillars {
@@ -2634,12 +2665,44 @@ img {
         align-items: center;
     }
     
+    .container {
+        padding: 0 16px;
+    }
+
+    .logo-link {
+        gap: 8px;
+    }
+
+    .brand-name {
+        font-size: 1.1rem;
+    }
+
+    .brand-tagline {
+        font-size: 0.6rem;
+        letter-spacing: 1px;
+    }
+
     .numerology-content {
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     
-    .num-intro, .num-feat {
+    .numerology-content h3 {
         text-align: center;
+        width: 100%;
+    }
+
+    .num-intro {
+        text-align: center;
+        width: 100%;
+    }
+
+    .numerology-pillars {
+        align-items: center;
+        width: 100%;
+        gap: 25px;
     }
     
     .num-feat {
@@ -2647,6 +2710,36 @@ img {
         align-items: center;
         text-align: center;
         gap: 12px;
+        width: 100%;
+    }
+
+    .num-feat h4, .num-feat p {
+        text-align: center;
+    }
+
+    .brand-calc-box {
+        width: 100%;
+        text-align: center;
+    }
+
+    .brand-calc-box h4, .brand-calc-box p {
+        text-align: center;
+    }
+
+    .calc-input-group {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .calc-input-group input {
+        width: 100%;
+    }
+
+    .calc-input-group button {
+        width: 100%;
+        padding: 12px 24px;
+        height: auto;
     }
     
     .karmkand-callout-card {
@@ -2711,5 +2804,15 @@ img {
     
     .testimonial-quote {
         font-size: 1.05rem;
+    }
+}
+
+/* Extra Small Mobile Overrides */
+@media (max-width: 375px) {
+    .hero-title {
+        font-size: 1.6rem;
+    }
+    .section-title {
+        font-size: 1.6rem;
     }
 }
