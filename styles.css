@@ -47,6 +47,8 @@
 html {
     scroll-behavior: smooth;
     scroll-margin-top: var(--header-height);
+    overflow-x: hidden;
+    width: 100%;
 }
 
 body {
@@ -55,17 +57,22 @@ body {
     font-family: var(--font-body);
     line-height: 1.6;
     overflow-x: hidden;
+    width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     font-weight: 700;
     letter-spacing: 1px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 p {
     font-size: 0.95rem;
     color: var(--color-gray-text);
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 a {
@@ -96,8 +103,8 @@ img {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background-color: var(--color-bg-primary);
     z-index: 9999;
     display: flex;
@@ -393,14 +400,18 @@ img {
 }
 
 .header-logo {
-    width: 48px;
-    height: 48px;
+    height: 70px;
+    width: auto;
     object-fit: contain;
     transition: var(--transition-smooth);
 }
 
 .logo-link:hover .header-logo {
-    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.65));
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.55));
+}
+
+.main-header.scrolled .header-logo {
+    height: 55px;
 }
 
 .logo-text {
@@ -534,15 +545,15 @@ img {
 }
 
 .hero-logo {
-    width: 150px;
-    height: 150px;
+    height: 90px;
+    width: auto;
     object-fit: contain;
-    filter: drop-shadow(0 0 12px rgba(123, 44, 191, 0.4)) drop-shadow(0 0 15px rgba(212, 175, 55, 0.3));
+    filter: drop-shadow(0 0 12px rgba(123, 44, 191, 0.35)) drop-shadow(0 0 15px rgba(212, 175, 55, 0.25));
     transition: var(--transition-smooth);
 }
 
 .hero-logo:hover {
-    filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.75));
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.55));
 }
 
 .hero-title {
@@ -1171,6 +1182,7 @@ img {
     border: var(--border-gold-glass);
     box-shadow: 0 15px 40px rgba(0,0,0,0.6);
     cursor: pointer;
+    width: 100%;
 }
 
 .flyer-img {
@@ -1217,8 +1229,8 @@ img {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background: rgba(11, 3, 18, 0.95);
     z-index: 5000;
     display: flex;
@@ -1400,6 +1412,9 @@ img {
     padding: 30px;
     text-align: center;
     transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .why-card:hover {
@@ -2136,15 +2151,15 @@ img {
 }
 
 .footer-logo {
-    width: 60px;
-    height: 60px;
+    height: 75px;
+    width: auto;
     object-fit: contain;
     margin-bottom: 15px;
     transition: var(--transition-smooth);
 }
 
 .footer-logo:hover {
-    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.65));
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.55));
 }
 
 .brand-col h3 {
@@ -2434,10 +2449,12 @@ img {
         transition: var(--transition-smooth);
         border-top: 1px solid rgba(212, 175, 55, 0.15);
         overflow-y: auto;
+        visibility: hidden;
     }
     
     .nav-menu.active {
         left: 0;
+        visibility: visible;
     }
     
     .nav-menu ul {
@@ -2477,10 +2494,28 @@ img {
         gap: 40px;
     }
     
+    .services-grid, .healing-grid, .products-grid, .why-us-grid, .blogs-grid, .youtube-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+    
     .about-visual, .overview-img-box, .karmkand-callout-card, .numerology-visual, .booking-form-box {
         max-width: 600px;
         margin: 0 auto;
         width: 100%;
+    }
+    
+    /* Responsive logo sizes on Tablet */
+    .header-logo {
+        height: 60px;
+    }
+    
+    .hero-logo {
+        height: 70px;
+    }
+    
+    .footer-logo {
+        height: 65px;
     }
     
     .hero-title {
@@ -2500,6 +2535,19 @@ img {
 
 /* Mobile (max-width: 767px) */
 @media (max-width: 767px) {
+    /* Responsive logo sizes on Mobile */
+    .header-logo {
+        height: 50px;
+    }
+    
+    .hero-logo {
+        height: 60px;
+    }
+    
+    .footer-logo {
+        height: 55px;
+    }
+
     .hero-title {
         font-size: 2.2rem;
     }
@@ -2512,13 +2560,18 @@ img {
         font-size: 1.85rem;
     }
     
+    .services-grid, .healing-grid, .products-grid, .why-us-grid, .blogs-grid, .youtube-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
     .about-pillars {
         grid-template-columns: 1fr;
     }
     
     .form-row {
         grid-template-columns: 1fr;
-        gap: 0;
+        gap: 20px;
     }
     
     .footer-grid {
@@ -2530,15 +2583,102 @@ img {
         align-items: center !important;
     }
     
-    /* Improve touch targets for mobile buttons */
+    /* Stack and center ritual items in Karmkand section */
+    .ritual-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+        padding: 20px 16px;
+    }
+    
+    .ritual-info {
+        width: 100%;
+    }
+    
     .btn-ritual-book {
-        padding: 10px 20px;
+        width: 100%;
+        text-align: center;
+        padding: 10px 16px;
         font-size: 0.8rem;
     }
     
     .btn-product-enquire {
         padding: 12px 24px;
         font-size: 0.85rem;
+    }
+    
+    /* Card Padding & Accordion Optimizations */
+    .services-overview-card, .karmkand-callout-card, .booking-form-box, .testimonial-card {
+        padding: 24px 20px;
+    }
+    
+    .accordion-header {
+        padding: 16px 20px;
+        font-size: 0.95rem;
+    }
+    
+    /* Mobile Centering & Alignment Adjustments */
+    .about-content {
+        text-align: center;
+    }
+    
+    .about-lead, .about-text {
+        text-align: center;
+    }
+    
+    .pillar-card {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .numerology-content {
+        text-align: center;
+    }
+    
+    .num-intro, .num-feat {
+        text-align: center;
+    }
+    
+    .num-feat {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 12px;
+    }
+    
+    .karmkand-callout-card {
+        text-align: center;
+        align-items: center;
+    }
+    
+    .callout-badge {
+        align-self: center;
+    }
+    
+    .ritual-features {
+        align-items: center;
+    }
+    
+    .contact-details-box {
+        text-align: center;
+    }
+    
+    .contact-methods {
+        align-items: stretch;
+    }
+    
+    .contact-link {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 15px;
+        gap: 15px;
+    }
+    
+    .contact-link:hover {
+        transform: translateY(-3px); /* Avoid slide translation on mobile */
     }
 }
 
@@ -2561,8 +2701,12 @@ img {
         width: 100%;
     }
     
-    .testimonial-card {
-        padding: 30px 16px;
+    .services-overview-card, .karmkand-callout-card, .booking-form-box, .testimonial-card {
+        padding: 20px 16px;
+    }
+    
+    .accordion-header {
+        padding: 14px 16px;
     }
     
     .testimonial-quote {

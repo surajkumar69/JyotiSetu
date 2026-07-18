@@ -637,17 +637,37 @@ document.addEventListener('DOMContentLoaded', () => {
             // Log details (mock backend transmission)
             console.log("Booking submission received:", { name, phone, email, date, time, service, msg });
 
-            // Display success alert
+            // Display success alert with dynamic slot detail injection
             if (formSuccess) {
+                const successMsgElement = formSuccess.querySelector('p');
+                if (successMsgElement) {
+                    successMsgElement.innerHTML = `Thank you for choosing Jyotii Setu, <strong>${name}</strong>. We have received your request for a <strong>${service}</strong> consultation on <strong>${date}</strong> at <strong>${time}</strong>. We are aligning your details and will contact you within 2 hours to confirm your consultation slot.`;
+                }
                 formSuccess.classList.remove('hidden');
+                
+                // Construct pre-filled WhatsApp message URL
+                const whatsappText = `Hello Jyotii Setu, I would like to book a consultation:\n\n` +
+                                     `• Name: ${name}\n` +
+                                     `• Phone: ${phone}\n` +
+                                     `• Email: ${email}\n` +
+                                     `• Service: ${service}\n` +
+                                     `• Date: ${date}\n` +
+                                     `• Time Slot: ${time}\n` +
+                                     `• Message/Birth Details: ${msg || 'None'}`;
+                
+                const encodedText = encodeURIComponent(whatsappText);
+                const whatsappUrl = `https://wa.me/917831955255?text=${encodedText}`;
+                
+                // Open in new tab
+                window.open(whatsappUrl, '_blank');
                 
                 // Reset form values
                 consultationForm.reset();
                 
-                // Hide alert after 8 seconds
+                // Hide alert after 10 seconds
                 setTimeout(() => {
                     formSuccess.classList.add('hidden');
-                }, 8000);
+                }, 10000);
             }
         });
     }
