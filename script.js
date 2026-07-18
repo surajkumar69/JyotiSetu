@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navMenu = document.getElementById('navMenu');
     const mainHeader = document.querySelector('.main-header');
     const navLinks = document.querySelectorAll('.nav-item');
-    const sections = document.querySelectorAll('section');
+    const sections = document.querySelectorAll('section, #numerology');
 
     // Toggle menu drawer
     if (menuToggle && navMenu) {
@@ -65,8 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Active link tracker based on scroll position
         let currentSec = 'home';
         sections.forEach(sec => {
-            const secTop = sec.offsetTop - 120;
-            const secHeight = sec.clientHeight;
+            const rect = sec.getBoundingClientRect();
+            const secTop = rect.top + window.scrollY - 130;
+            const secHeight = sec.clientHeight || rect.height;
             if (window.scrollY >= secTop && window.scrollY < secTop + secHeight) {
                 currentSec = sec.getAttribute('id');
             }
