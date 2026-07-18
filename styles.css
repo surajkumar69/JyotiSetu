@@ -125,11 +125,10 @@ img {
 .loader-logo {
     width: 90px;
     height: 90px;
-    border-radius: 50%;
     position: absolute;
     top: 15px;
     left: 15px;
-    border: 2px solid var(--color-gold-primary);
+    object-fit: contain;
     animation: pulseLogo 2s infinite ease-in-out;
 }
 
@@ -158,8 +157,8 @@ img {
 }
 
 @keyframes pulseLogo {
-    0%, 100% { transform: scale(1); opacity: 0.9; }
-    50% { transform: scale(1.05); opacity: 1; box-shadow: var(--shadow-gold-glow); }
+    0%, 100% { transform: scale(1); opacity: 0.9; filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.2)); }
+    50% { transform: scale(1.05); opacity: 1; filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.6)); }
 }
 
 @keyframes textFade {
@@ -396,8 +395,12 @@ img {
 .header-logo {
     width: 48px;
     height: 48px;
-    border-radius: 50%;
-    border: 1px solid var(--color-gold-primary);
+    object-fit: contain;
+    transition: var(--transition-smooth);
+}
+
+.logo-link:hover .header-logo {
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.65));
 }
 
 .logo-text {
@@ -533,9 +536,13 @@ img {
 .hero-logo {
     width: 150px;
     height: 150px;
-    border-radius: 50%;
-    border: 3.5px solid var(--color-gold-primary);
-    box-shadow: var(--shadow-purple-glow), var(--shadow-gold-glow);
+    object-fit: contain;
+    filter: drop-shadow(0 0 12px rgba(123, 44, 191, 0.4)) drop-shadow(0 0 15px rgba(212, 175, 55, 0.3));
+    transition: var(--transition-smooth);
+}
+
+.hero-logo:hover {
+    filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.75));
 }
 
 .hero-title {
@@ -754,7 +761,7 @@ img {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
 }
 
@@ -769,6 +776,8 @@ img {
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
 }
 
 .service-card::before {
@@ -827,6 +836,7 @@ img {
     font-size: 0.9rem;
     margin-bottom: 25px;
     line-height: 1.6;
+    flex-grow: 1;
 }
 
 .service-link {
@@ -1238,7 +1248,7 @@ img {
 
 .healing-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
 }
 
@@ -1249,6 +1259,8 @@ img {
     padding: 30px;
     text-align: center;
     transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
 }
 
 .healing-card:hover {
@@ -1273,6 +1285,7 @@ img {
 
 .healing-card p {
     font-size: 0.85rem;
+    flex-grow: 1;
 }
 
 /* --- SPIRITUAL PRODUCTS SECTION --- */
@@ -1283,7 +1296,7 @@ img {
 
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 35px;
 }
 
@@ -1294,6 +1307,8 @@ img {
     overflow: hidden;
     transition: var(--transition-smooth);
     box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
 }
 
 .product-card:hover {
@@ -1323,6 +1338,9 @@ img {
 
 .product-details {
     padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .product-details h4 {
@@ -1339,6 +1357,7 @@ img {
     font-size: 0.85rem;
     margin-bottom: 20px;
     min-height: 60px;
+    flex-grow: 1;
 }
 
 .btn-product-enquire {
@@ -1513,7 +1532,7 @@ img {
 
 .blogs-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
 }
 
@@ -1523,6 +1542,8 @@ img {
     border-radius: 16px;
     padding: 30px;
     transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
 }
 
 .blog-card:hover {
@@ -1568,6 +1589,7 @@ img {
     font-size: 0.85rem;
     margin-bottom: 20px;
     line-height: 1.5;
+    flex-grow: 1;
 }
 
 .btn-read-more {
@@ -2116,9 +2138,13 @@ img {
 .footer-logo {
     width: 60px;
     height: 60px;
-    border-radius: 50%;
-    border: 1px solid var(--color-gold-primary);
+    object-fit: contain;
     margin-bottom: 15px;
+    transition: var(--transition-smooth);
+}
+
+.footer-logo:hover {
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.65));
 }
 
 .brand-col h3 {
@@ -2213,34 +2239,184 @@ img {
     color: var(--color-gold-light);
 }
 
+/* --- YOUTUBE CHANNEL INTEGRATION --- */
+.header-social-icon {
+    color: var(--color-gold-primary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+    margin-right: 15px;
+}
+
+.header-social-icon:hover {
+    color: #FF0000;
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.6));
+}
+
+.footer-socials {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.footer-social-svg {
+    color: var(--color-gold-primary);
+    transition: var(--transition-smooth);
+}
+
+.footer-socials a:hover .footer-social-svg {
+    color: var(--color-gold-light);
+    transform: translateY(-3px);
+    filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.6));
+}
+
+.footer-socials a[aria-label="YouTube"]:hover .footer-social-svg {
+    color: #FF0000;
+    filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.6));
+}
+
+.btn-youtube-subscribe {
+    background: rgba(255, 0, 0, 0.08);
+    color: #FFFFFF;
+    border: 1px solid #FF0000;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.15);
+}
+
+.btn-youtube-subscribe:hover {
+    background: #FF0000;
+    color: #FFFFFF;
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
+    border-color: #FF0000;
+}
+
+.youtube-section {
+    padding: 100px 0;
+    background-color: var(--color-bg-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.youtube-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 35px;
+}
+
+.video-card {
+    background: var(--color-card-bg);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: var(--transition-smooth);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.video-card:hover {
+    border-color: var(--color-gold-primary);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-purple-glow), var(--shadow-gold-soft);
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    background-color: #000000;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-info {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.video-info h4 {
+    font-size: 1.25rem;
+    color: var(--color-white);
+    margin-bottom: 12px;
+    line-height: 1.4;
+    transition: var(--transition-smooth);
+}
+
+.video-card:hover .video-info h4 {
+    color: var(--color-gold-light);
+}
+
+.video-info p {
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.video-card-link {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-gold-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.video-card-link:hover {
+    color: var(--color-gold-light);
+}
+
+.youtube-btn-wrapper {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
 /* --- RESPONSIVE MEDIA QUERIES --- */
 
-@media (max-width: 1024px) {
-    .about-grid, .overview-grid, .karmkand-grid, .numerology-grid, .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
+/* Laptop & Below (max-width: 1439px) */
+@media (max-width: 1439px) {
+    .container {
+        max-width: 95%;
     }
     
-    .about-visual, .overview-img-box, .karmkand-callout-card, .numerology-visual, .booking-form-box {
-        max-width: 600px;
-        margin: 0 auto;
-        width: 100%;
-    }
-    
-    .hero-title {
-        font-size: 3rem;
-    }
-    
-    .footer-grid {
-        grid-template-columns: 1fr 1fr;
+    .nav-menu ul {
+        gap: 18px; /* Slightly reduce navigation gap to prevent header overflow */
     }
 }
 
-@media (max-width: 768px) {
+/* Tablet & Below (max-width: 1023px) */
+@media (max-width: 1023px) {
     :root {
         --header-height: 70px;
     }
     
+    .container {
+        padding: 0 20px;
+    }
+    
+    .about-section, .services-section, .karmkand-section, .numerology-section, .healing-section, .products-section, .why-us-section, .testimonials-section, .blogs-section, .faq-section, .contact-section, .youtube-section {
+        padding: 60px 0; /* Compact vertical spacing on smaller viewports */
+    }
+    
+    /* Navigation Drawer Activation */
     .mobile-menu-toggle {
         display: flex;
     }
@@ -2253,9 +2429,11 @@ img {
         height: calc(100vh - var(--header-height));
         background: rgba(22, 7, 34, 0.98);
         backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         padding: 50px 24px;
         transition: var(--transition-smooth);
         border-top: 1px solid rgba(212, 175, 55, 0.15);
+        overflow-y: auto;
     }
     
     .nav-menu.active {
@@ -2265,14 +2443,18 @@ img {
     .nav-menu ul {
         flex-direction: column;
         align-items: center;
-        gap: 30px;
+        gap: 25px;
     }
     
     .nav-item {
         font-size: 1.1rem;
+        padding: 12px 0;
+        display: inline-block;
+        width: 100%;
+        text-align: center;
     }
     
-    /* Toggle active class bars animation */
+    /* Mobile Drawer Toggle Animation */
     .mobile-menu-toggle.active .bar:nth-child(1) {
         transform: translateY(9px) rotate(45deg);
     }
@@ -2285,16 +2467,49 @@ img {
         transform: translateY(-9px) rotate(-45deg);
     }
     
+    .header-btn {
+        display: none; /* Hide header booking button on tablet and mobile */
+    }
+    
+    /* Grid adjustments */
+    .about-grid, .overview-grid, .karmkand-grid, .numerology-grid, .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .about-visual, .overview-img-box, .karmkand-callout-card, .numerology-visual, .booking-form-box {
+        max-width: 600px;
+        margin: 0 auto;
+        width: 100%;
+    }
+    
     .hero-title {
-        font-size: 2.3rem;
+        font-size: 2.8rem;
     }
     
     .hero-subtitle {
-        font-size: 1.15rem;
+        font-size: 1.3rem;
+        max-width: 90%;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+}
+
+/* Mobile (max-width: 767px) */
+@media (max-width: 767px) {
+    .hero-title {
+        font-size: 2.2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
     }
     
     .section-title {
-        font-size: 2rem;
+        font-size: 1.85rem;
     }
     
     .about-pillars {
@@ -2308,16 +2523,33 @@ img {
     
     .footer-grid {
         grid-template-columns: 1fr;
+        text-align: center;
     }
     
-    .header-btn {
-        display: none;
+    .footer-col {
+        align-items: center !important;
+    }
+    
+    /* Improve touch targets for mobile buttons */
+    .btn-ritual-book {
+        padding: 10px 20px;
+        font-size: 0.8rem;
+    }
+    
+    .btn-product-enquire {
+        padding: 12px 24px;
+        font-size: 0.85rem;
     }
 }
 
-@media (max-width: 485px) {
+/* Extra Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 16px;
+    }
+    
     .hero-title {
-        font-size: 1.85rem;
+        font-size: 1.8rem;
     }
     
     .hero-buttons {
@@ -2330,10 +2562,10 @@ img {
     }
     
     .testimonial-card {
-        padding: 30px 20px;
+        padding: 30px 16px;
     }
     
     .testimonial-quote {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
     }
 }
