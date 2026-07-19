@@ -130,24 +130,24 @@ img {
 
 .loader-logo-container {
     position: relative;
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     margin: 0 auto 20px;
 }
 
 .loader-logo {
-    width: 90px;
-    height: 90px;
+    width: 115px;
+    height: 115px;
     position: absolute;
-    top: 15px;
-    left: 15px;
+    top: 17.5px;
+    left: 17.5px;
     object-fit: contain;
     animation: pulseLogo 2s infinite ease-in-out;
 }
 
 .loader-ring {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     border: 3px solid transparent;
     border-top: 3px solid var(--color-gold-primary);
     border-bottom: 3px solid var(--color-purple-accent);
@@ -383,7 +383,7 @@ img {
 }
 
 .main-header.scrolled {
-    height: 72px;
+    height: 80px;
     background: rgba(11, 3, 18, 0.95);
     border-bottom: 1px solid rgba(212, 175, 55, 0.3);
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -407,7 +407,7 @@ img {
 }
 
 .header-logo {
-    height: 52px;
+    height: 70px;
     width: auto;
     object-fit: contain;
     transition: var(--transition-smooth);
@@ -418,7 +418,7 @@ img {
 }
 
 .main-header.scrolled .header-logo {
-    height: 44px;
+    height: 60px;
 }
 
 .logo-text {
@@ -568,7 +568,7 @@ img {
 }
 
 .hero-logo {
-    height: 90px;
+    height: 120px;
     width: auto;
     object-fit: contain;
     filter: drop-shadow(0 0 12px rgba(123, 44, 191, 0.35)) drop-shadow(0 0 15px rgba(212, 175, 55, 0.25));
@@ -2306,7 +2306,7 @@ img {
 }
 
 .footer-logo {
-    height: 75px;
+    height: 100px;
     width: auto;
     object-fit: contain;
     margin-bottom: 15px;
@@ -2574,7 +2574,7 @@ img {
 /* Tablet & Below (max-width: 1023px) */
 @media (max-width: 1023px) {
     :root {
-        --header-height: 70px;
+        --header-height: 80px;
     }
     
     .container {
@@ -2661,15 +2661,15 @@ img {
     
     /* Responsive logo sizes on Tablet */
     .header-logo {
-        height: 48px;
+        height: 62px;
     }
     
     .hero-logo {
-        height: 70px;
+        height: 90px;
     }
     
     .footer-logo {
-        height: 65px;
+        height: 85px;
     }
     
     .hero-title {
@@ -2691,15 +2691,15 @@ img {
 @media (max-width: 767px) {
     /* Responsive logo sizes on Mobile */
     .header-logo {
-        height: 42px;
+        height: 55px;
     }
     
     .hero-logo {
-        height: 60px;
+        height: 80px;
     }
     
     .footer-logo {
-        height: 55px;
+        height: 72px;
     }
 
     .hero-title {

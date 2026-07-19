@@ -645,38 +645,12 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Get booked slots from LocalStorage
-        let bookedSlots = JSON.parse(localStorage.getItem('jyotisetu_booked_slots') || '{}');
-
-        // Seed initial booked slots deterministically if not already stored
-        if (!bookedSlots[selectedDate]) {
-            const day = new Date(selectedDate).getDate() || 1;
-            // Seed booked slots so the user immediately sees the Booked states.
-            // - Even days: seed slots 1 (10:00 AM – 12:00 PM) and 4 (04:00 PM – 06:00 PM)
-            // - Odd days: seed slots 2 (12:00 PM – 02:00 PM) and 5 (06:00 PM – 08:00 PM)
-            if (day % 2 === 0) {
-                bookedSlots[selectedDate] = ["10:00 AM – 12:00 PM", "04:00 PM – 06:00 PM"];
-            } else {
-                bookedSlots[selectedDate] = ["12:00 PM – 02:00 PM", "06:00 PM – 08:00 PM"];
-            }
-            localStorage.setItem('jyotisetu_booked_slots', JSON.stringify(bookedSlots));
-        }
-
-        const dateBooked = bookedSlots[selectedDate] || [];
         preferredTimeInput.innerHTML = '<option value="" disabled selected>Select Time Slot</option>';
 
         timeSlots.forEach(slot => {
-            const isBooked = dateBooked.includes(slot.time);
             const option = document.createElement('option');
             option.value = slot.time;
-            
-            if (isBooked) {
-                option.disabled = true;
-                option.textContent = `${slot.emoji} ${slot.time} (Booked)`;
-            } else {
-                option.textContent = `${slot.emoji} ${slot.time}`;
-            }
-            
+            option.textContent = `${slot.emoji} ${slot.time}`;
             preferredTimeInput.appendChild(option);
         });
 
@@ -726,14 +700,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 formSuccess.classList.remove('hidden');
 
                 // Save to local storage as booked slot
-                let bookedSlots = JSON.parse(localStorage.getItem('jyotisetu_booked_slots') || '{}');
+                let bookedSlots = JSON.parse(localStorage.getItem('jyotisetu_confirmed_bookings') || '{}');
                 if (!bookedSlots[date]) {
                     bookedSlots[date] = [];
                 }
                 if (!bookedSlots[date].includes(time)) {
                     bookedSlots[date].push(time);
                 }
-                localStorage.setItem('jyotisetu_booked_slots', JSON.stringify(bookedSlots));
+                localStorage.setItem('jyotisetu_confirmed_bookings', JSON.stringify(bookedSlots));
                 
                 // Construct pre-filled WhatsApp message URL
                 const whatsappText = `Hello Jyotii Setu, I would like to book a consultation:\n\n` +
