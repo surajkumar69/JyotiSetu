@@ -2076,6 +2076,115 @@ img {
     color: var(--color-white);
 }
 
+/* --- TIME SLOTS SYSTEM --- */
+.time-slots-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.time-slot-card {
+    background: rgba(22, 7, 34, 0.6);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: 12px;
+    padding: 16px 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    position: relative;
+    user-select: none;
+}
+
+.time-slot-card .clock-icon {
+    font-size: 1.6rem;
+    transition: transform 0.3s ease;
+}
+
+.time-slot-card .time-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-white);
+    font-family: var(--font-body);
+}
+
+.time-slot-card .slot-status {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Available Slot Styles */
+.time-slot-card.available {
+    border-color: rgba(212, 175, 55, 0.25);
+}
+
+.time-slot-card.available .slot-status {
+    color: var(--color-gold-light);
+}
+
+.time-slot-card.available:hover {
+    border-color: var(--color-gold-primary);
+    box-shadow: var(--shadow-gold-soft);
+    background: rgba(58, 19, 99, 0.8);
+    transform: translateY(-3px);
+}
+
+.time-slot-card.available:hover .clock-icon {
+    transform: scale(1.1);
+}
+
+/* Selected Slot Styles */
+.time-slot-card.available.selected {
+    background: var(--color-gold-primary);
+    border-color: var(--color-gold-primary);
+    box-shadow: var(--shadow-gold-glow);
+}
+
+.time-slot-card.available.selected .clock-icon {
+    transform: scale(1.15);
+}
+
+.time-slot-card.available.selected .time-text {
+    color: var(--color-bg-primary);
+    font-weight: 700;
+}
+
+.time-slot-card.available.selected .slot-status {
+    color: var(--color-bg-primary);
+    font-weight: 700;
+}
+
+/* Booked Slot Styles */
+.time-slot-card.booked {
+    background: rgba(15, 6, 23, 0.5);
+    border-color: rgba(212, 175, 55, 0.05);
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.time-slot-card.booked .clock-icon {
+    filter: grayscale(1);
+    opacity: 0.4;
+}
+
+.time-slot-card.booked .time-text {
+    color: rgba(255, 255, 255, 0.35);
+    text-decoration: line-through;
+}
+
+.time-slot-card.booked .slot-status {
+    color: #e57373;
+    font-weight: 600;
+}
+
 /* --- FLOATING CONTROLS --- */
 .scroll-to-top {
     position: fixed;

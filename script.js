@@ -622,6 +622,96 @@ document.addEventListener('DOMContentLoaded', () => {
     const consultationForm = document.getElementById('consultationForm');
     const formSuccess = document.getElementById('formSuccess');
 
+    // Time Slots Configuration
+    const timeSlots = [
+        { time: "08:00 AM – 10:00 AM", emoji: "🕗" },
+        { time: "10:00 AM – 12:00 PM", emoji: "🕙" },
+        { time: "12:00 PM – 02:00 PM", emoji: "🕛" },
+        { time: "02:00 PM – 04:00 PM", emoji: "🕑" },
+        { time: "04:00 PM – 06:00 PM", emoji: "🕓" },
+        { time: "06:00 PM – 08:00 PM", emoji: "🕕" },
+        { time: "08:00 PM – 10:00 PM", emoji: "🕗" }
+    ];
+
+    const dateInput = document.getElementById('preferredDate');
+    const timeSlotsContainer = document.getElementById('timeSlotsContainer');
+    const preferredTimeInput = document.getElementById('preferredTime');
+
+    function renderSlots() {
+        if (!dateInput || !timeSlotsContainer || !preferredTimeInput) return;
+
+        const selectedDate = dateInput.value;
+        if (!selectedDate) {
+            timeSlotsContainer.innerHTML = '<p class="form-desc" style="text-align: center; width: 100%;">Please select a preferred date first.</p>';
+            return;
+        }
+
+        // Get booked slots from LocalStorage
+        let bookedSlots = JSON.parse(localStorage.getItem('jyotisetu_booked_slots') || '{}');
+
+        // Seed initial booked slots deterministically if not already stored
+        if (!bookedSlots[selectedDate]) {
+            const day = new Date(selectedDate).getDate() || 1;
+            // Seed booked slots so the user immediately sees the Booked states.
+            // - Even days: seed slots 1 (10:00 AM – 12:00 PM) and 4 (04:00 PM – 06:00 PM)
+            // - Odd days: seed slots 2 (12:00 PM – 02:00 PM) and 5 (06:00 PM – 08:00 PM)
+            if (day % 2 === 0) {
+                bookedSlots[selectedDate] = ["10:00 AM – 12:00 PM", "04:00 PM – 06:00 PM"];
+            } else {
+                bookedSlots[selectedDate] = ["12:00 PM – 02:00 PM", "06:00 PM – 08:00 PM"];
+            }
+            localStorage.setItem('jyotisetu_booked_slots', JSON.stringify(bookedSlots));
+        }
+
+        const dateBooked = bookedSlots[selectedDate] || [];
+        timeSlotsContainer.innerHTML = '';
+
+        timeSlots.forEach(slot => {
+            const isBooked = dateBooked.includes(slot.time);
+            
+            const card = document.createElement('div');
+            card.className = `time-slot-card ${isBooked ? 'booked' : 'available'}`;
+            card.setAttribute('data-time', slot.time);
+
+            card.innerHTML = `
+                <span class="clock-icon">${slot.emoji}</span>
+                <span class="time-text">${slot.time}</span>
+                <span class="slot-status">${isBooked ? 'Booked' : 'Available'}</span>
+            `;
+
+            if (!isBooked) {
+                card.addEventListener('click', () => {
+                    // Toggle active styles
+                    timeSlotsContainer.querySelectorAll('.time-slot-card').forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                    preferredTimeInput.value = slot.time;
+                });
+            }
+
+            timeSlotsContainer.appendChild(card);
+        });
+
+        // Reset selected time
+        preferredTimeInput.value = '';
+    }
+
+    // Set today's date and register listeners
+    if (dateInput) {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        const todayStr = `${yyyy}-${mm}-${dd}`;
+        
+        dateInput.min = todayStr;
+        dateInput.value = todayStr;
+
+        dateInput.addEventListener('change', renderSlots);
+        
+        // Initial render
+        renderSlots();
+    }
+
     if (consultationForm) {
         consultationForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -645,6 +735,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     successMsgElement.innerHTML = `Thank you for choosing Jyotii Setu, <strong>${name}</strong>. We have received your request for a <strong>${service}</strong> consultation on <strong>${date}</strong> at <strong>${time}</strong>. We are aligning your details and will contact you within 2 hours to confirm your consultation slot.`;
                 }
                 formSuccess.classList.remove('hidden');
+
+                // Save to local storage as booked slot
+                let bookedSlots = JSON.parse(localStorage.getItem('jyotisetu_booked_slots') || '{}');
+                if (!bookedSlots[date]) {
+                    bookedSlots[date] = [];
+                }
+                if (!bookedSlots[date].includes(time)) {
+                    bookedSlots[date].push(time);
+                }
+                localStorage.setItem('jyotisetu_booked_slots', JSON.stringify(bookedSlots));
                 
                 // Construct pre-filled WhatsApp message URL
                 const whatsappText = `Hello Jyotii Setu, I would like to book a consultation:\n\n` +
@@ -664,6 +764,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Reset form values
                 consultationForm.reset();
+
+                // Re-set date input defaults & re-render slots
+                if (dateInput) {
+                    const today = new Date();
+                    const yyyy = today.getFullYear();
+                    const mm = String(today.getMonth() + 1).padStart(2, '0');
+                    const dd = String(today.getDate()).padStart(2, '0');
+                    const todayStr = `${yyyy}-${mm}-${dd}`;
+                    
+                    dateInput.min = todayStr;
+                    dateInput.value = todayStr;
+                }
+                renderSlots();
                 
                 // Hide alert after 10 seconds
                 setTimeout(() => {

@@ -1090,19 +1090,17 @@
                             </div>
                         </div>
 
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="preferredDate">Preferred Date</label>
-                                <input type="date" id="preferredDate" required>
+                        <div class="form-group">
+                            <label for="preferredDate">Preferred Date</label>
+                            <input type="date" id="preferredDate" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Preferred Time Slot</label>
+                            <div id="timeSlotsContainer" class="time-slots-container">
+                                <!-- Rendered dynamically by script.js -->
                             </div>
-                            <div class="form-group">
-                                <label for="preferredTime">Preferred Time</label>
-                                <select id="preferredTime" required>
-                                    <option value="" disabled selected>Select Slot</option>
-                                    <option value="7:00 PM - 9:00 PM">7:00 PM - 9:00 PM</option>
-                                    <option value="9:00 PM - 11:00 PM">9:00 PM - 11:00 PM</option>
-                                </select>
-                            </div>
+                            <input type="text" id="preferredTime" required readonly style="position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none;">
                         </div>
 
                         <div class="form-group">
