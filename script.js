@@ -634,15 +634,14 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const dateInput = document.getElementById('preferredDate');
-    const timeSlotsContainer = document.getElementById('timeSlotsContainer');
     const preferredTimeInput = document.getElementById('preferredTime');
 
     function renderSlots() {
-        if (!dateInput || !timeSlotsContainer || !preferredTimeInput) return;
+        if (!dateInput || !preferredTimeInput) return;
 
         const selectedDate = dateInput.value;
         if (!selectedDate) {
-            timeSlotsContainer.innerHTML = '<p class="form-desc" style="text-align: center; width: 100%;">Please select a preferred date first.</p>';
+            preferredTimeInput.innerHTML = '<option value="" disabled selected>Please select a date first</option>';
             return;
         }
 
@@ -664,31 +663,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const dateBooked = bookedSlots[selectedDate] || [];
-        timeSlotsContainer.innerHTML = '';
+        preferredTimeInput.innerHTML = '<option value="" disabled selected>Select Time Slot</option>';
 
         timeSlots.forEach(slot => {
             const isBooked = dateBooked.includes(slot.time);
+            const option = document.createElement('option');
+            option.value = slot.time;
             
-            const card = document.createElement('div');
-            card.className = `time-slot-card ${isBooked ? 'booked' : 'available'}`;
-            card.setAttribute('data-time', slot.time);
-
-            card.innerHTML = `
-                <span class="clock-icon">${slot.emoji}</span>
-                <span class="time-text">${slot.time}</span>
-                <span class="slot-status">${isBooked ? 'Booked' : 'Available'}</span>
-            `;
-
-            if (!isBooked) {
-                card.addEventListener('click', () => {
-                    // Toggle active styles
-                    timeSlotsContainer.querySelectorAll('.time-slot-card').forEach(c => c.classList.remove('selected'));
-                    card.classList.add('selected');
-                    preferredTimeInput.value = slot.time;
-                });
+            if (isBooked) {
+                option.disabled = true;
+                option.textContent = `${slot.emoji} ${slot.time} (Booked)`;
+            } else {
+                option.textContent = `${slot.emoji} ${slot.time}`;
             }
-
-            timeSlotsContainer.appendChild(card);
+            
+            preferredTimeInput.appendChild(option);
         });
 
         // Reset selected time
